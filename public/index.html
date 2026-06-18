@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniRouter - AI Model Routing Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .badge-fast { background-color: #10b981; }
+    .badge-coding { background-color: #3b82f6; }
+    .badge-reasoning { background-color: #8b5cf6; }
+    .badge-long { background-color: #f59e0b; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-2">🔍 OmniRouter</h1>
+    <p class="text-gray-600 mb-6">AI Model Routing Engine - Production Grade</p>
+
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Route a Request</h2>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Prompt</label>
+          <textarea
+            id="prompt-input"
+            class="w-full p-3 border border-gray-300 rounded-md"
+            rows="3"
+            placeholder="Enter your prompt here..."
+          >How to create a React component with TypeScript?</textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="flex items-center">
+              <input type="checkbox" id="cost-sensitive" class="mr-2">
+              <span class="text-sm">Cost-sensitive mode</span>
+            </label>
+          </div>
+          <div>
+            <label class="flex items-center">
+              <input type="checkbox" id="latency-sensitive" class="mr-2">
+              <span class="text-sm">Low-latency mode</span>
+            </label>
+          </div>
+        </div>
+
+        <button
+          onclick="routeRequest()"
+          class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+        >
+          Route Request
+        </button>
+      </div>
+    </div>
+
+    <div id="result" class="hidden">
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 class="text-xl font-semibold mb-4">Routing Result</h2>
+
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <span id="badge" class="badge px-3 py-1 rounded-full text-white font-bold mr-3"></span>
+            <span id="model-name" class="text-lg font-mono"></span>
+            <span id="fallback" class="ml-3 text-sm text-gray-500"></span>
+          </div>
+
+          <div id="reason" class="text-gray-700 italic"></div>
+
+          <div class="border-t pt-4">
+            <h3 class="font-medium mb-2">Metadata</h3>
+            <div class="grid grid-cols-2 gap-2 text-sm font-mono">
+              <div>Complexity: <span id="complexity"></span></div>
+              <div>Task Type: <span id="task-type"></span></div>
+              <div>Context Length: <span id="context-length"></span></div>
+              <div>Latency Mode: <span id="latency-mode"></span></div>
+              <div>Cost Mode: <span id="cost-mode"></span></div>
+              <div>Token Estimate: <span id="token-estimate"></span></div>
+            </div>
+          </div>
+
+          <details>
+            <summary class="cursor-pointer font-medium">Raw JSON Output</summary>
+            <pre id="json-output" class="bg-gray-900 text-gray-100 p-4 rounded-md mt-2 overflow-x-auto text-xs"></pre>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center text-gray-500 text-sm pt-6 border-t">
+      <p>© 2026 OmniRouter. All rights reserved.</p>
+      <p class="mt-1">Powered by PrakashPujariAI</p>
+    </div>
+  </div>
+
+  <script>
+    async function routeRequest() {
+      const prompt = document.getElementById('prompt-input').value;
+      const costSensitive = document.getElementById('cost-sensitive').checked;
+      const latencySensitive = document.getElementById('latency-sensitive').checked;
+
+      try {
+        const response = await fetch('/api/route', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt,
+            cost_sensitive: costSensitive,
+            latency_sensitive: latencySensitive
+          })
+        });
+
+        const data = await response.json();
+        displayResult(data);
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    }
+
+    function displayResult(data) {
+      document.getElementById('result').classList.remove('hidden');
+
+      // Update badge
+      const badge = document.getElementById('badge');
+      badge.textContent = data.ui.badge;
+      badge.className = 'badge badge-' + data.category + ' px-3 py-1 rounded-full text-white font-bold mr-3';
+
+      document.getElementById('model-name').textContent = data.selected_model;
+      document.getElementById('fallback').textContent = data.fallback_model ? 'Fallback: ' + data.fallback_model : '';
+      document.getElementById('reason').textContent = data.reason;
+
+      document.getElementById('complexity').textContent = data.metadata.complexity;
+      document.getElementById('task-type').textContent = data.metadata.task_type;
+      document.getElementById('context-length').textContent = data.metadata.context_length;
+      document.getElementById('latency-mode').textContent = data.metadata.latency_mode;
+      document.getElementById('cost-mode').textContent = data.metadata.cost_mode;
+      document.getElementById('token-estimate').textContent = data.metadata.token_estimate || 'N/A';
+
+      document.getElementById('json-output').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"version":3,"file":"RoutingBadge.d.ts","sourceRoot":"","sources":["../../../src/ui/components/RoutingBadge.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAC;AAC1B,OAAO,EAAE,eAAe,EAAE,MAAM,aAAa,CAAC;AAE9C,UAAU,iBAAiB;IACzB,QAAQ,EAAE,eAAe,CAAC;CAC3B;AAED,eAAO,MAAM,YAAY,EAAE,KAAK,CAAC,EAAE,CAAC,iBAAiB,CAiCpD,CAAC"}

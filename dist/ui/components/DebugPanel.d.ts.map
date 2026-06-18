@@ -1,0 +1,1 @@
+{"version":3,"file":"DebugPanel.d.ts","sourceRoot":"","sources":["../../../src/ui/components/DebugPanel.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAC;AAC1B,OAAO,EAAE,eAAe,EAAE,MAAM,aAAa,CAAC;AAE9C,UAAU,eAAe;IACvB,QAAQ,EAAE,eAAe,CAAC;CAC3B;AAED,eAAO,MAAM,UAAU,EAAE,KAAK,CAAC,EAAE,CAAC,eAAe,CAgDhD,CAAC"}

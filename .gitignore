@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Dependencies
+node_modules/
+
 # Build output
 dist/
 
@@ -21,8 +24,6 @@ npm-debug.log*
 # Coverage
 coverage/
 
-# Test output
+# Test artifacts (in source __tests__ folder)
 __tests__/**/*.test.d.ts
 __tests__/**/*.test.d.ts.map
-__tests__/**/*.test.js
-__tests__/**/*.test.js.map

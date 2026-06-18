@@ -79,12 +79,50 @@ function ChatInterface() {
 
 ## Model Categories
 
-| Category | Use Case | Examples |
-|----------|----------|----------|
-| `fast` | Simple Q&A, high-volume | GPT-3.5, Claude Haiku |
-| `coding` | Code generation, debugging | GPT-4, Claude Sonnet |
-| `reasoning` | Multi-step reasoning, planning | Claude Opus, GPT-4 |
-| `long-context` | Document processing, RAG | Claude (200K) |
+| Category | Use Case | Examples | Color |
+|----------|----------|----------|-------|
+| `fast` | Simple Q&A, high-volume | GPT-3.5, Claude Haiku | ![green](https://placehold.co/16x16/10b981/10b981.png) `#10b981` |
+| `coding` | Code generation, debugging | GPT-4, Claude Sonnet | ![blue](https://placehold.co/16x16/3b82f6/3b82f6.png) `#3b82f6` |
+| `reasoning` | Multi-step reasoning, planning | Claude Opus, GPT-4 | ![purple](https://placehold.co/16x16/8b5cf6/8b5cf6.png) `#8b5cf6` |
+| `long-context` | Document processing, RAG | Claude (200K) | ![amber](https://placehold.co/16x16/f59e0b/f59e0b.png) `#f59e0b` |
+
+## UI Preview
+
+To see the UI, run the server locally and open `http://localhost:8000`.
+
+Once deployed, the web interface provides:
+- Live prompt input and routing
+- Real-time UI updates
+- Metadata visualization
+- Fallback model indicators
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  🔍 OmniRouter - AI Model Routing Engine                             │
+│  AI Model Routing Engine - Production Grade                           │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  Prompt: [ How do I create a React component with TypeScript?     ] │
+│         [_______________________________][BUTTON] Route Request      │
+│                                                                     │
+│  ┌── Routing Result ──────────────────────────────────────────────┐ │
+│  │                                                              │ │
+│  │  [CODE] coding-gpt-4 ⚡ Fallback: coding-claude-sonnet          │ │
+│  │                                                              │ │
+│  │  "Coding task detected: routed to specialized coding model"    │ │
+│  │                                                              │ │
+│  │  Metadata:                                                    │ │
+│  │    Complexity: low        Task Type: code                     │ │
+│  │    Context: 50 chars      Token Est: 13                       │ │
+│  │    Keywords: react, typescript, async, await                  │ │
+│  │                                                              │ │
+│  │  {"selected_model":"coding-gpt-4","category":"coding",...}    │ │
+│  └────────────────────────────────────────────────────────────────┘ │
+│                                                                     │
+│                          © 2026 OmniRouter. All rights reserved.   │
+│                                Powered by PrakashPujariAI           │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
 ## Routing Rules
 

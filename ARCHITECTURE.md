@@ -197,6 +197,34 @@ GET /api/models
 GET /api/health
 ```
 
+## Deployment
+
+### Render (render.yaml)
+```yaml
+services:
+  - type: web
+    name: omni-router-api
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+```
+
+### Vercel (vercel.json)
+```json
+{
+  "version": 2,
+  "builds": [{ "src": "api/index.ts", "use": "@vercel/node" }]
+}
+```
+
+### Manual Deploy
+```bash
+# Render
+git push origin main
+
+# Vercel
+vercel --prod
+```
+
 ## License
 
 © 2026 OmniRouter. All rights reserved.

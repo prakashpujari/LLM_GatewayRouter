@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniRouter UI Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #f9fafb;
+    }
+    .demo-section {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      margin-right: 0.5rem;
+    }
+    .model-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .debug-panel {
+      background: #f5f5f5;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.875rem;
+    }
+    .debug-panel h4 {
+      margin: 0 0 0.5rem 0;
+    }
+    .debug-panel div {
+      margin-bottom: 0.25rem;
+    }
+    .debug-panel strong {
+      color: #374151;
+    }
+    .json-output {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.75rem;
+      overflow-x: auto;
+    }
+    .react-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    h2 {
+      color: #111827;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 OmniRouter UI Demo</h1>
+  <p>AI Model Routing Engine - Production Grade with React + TypeScript Testing Interface</p>
+
+  <h2>1. Simple Chat Request</h2>
+  <div class="demo-section">
+    <div class="model-info">
+      <span class="badge" style="background-color: #10b981;">FAST</span>
+      <span>fast-gpt-3.5</span>
+    </div>
+    <div class="debug-panel">
+      <h4>Routing Debug</h4>
+      <div><strong>Complexity:</strong> low</div>
+      <div><strong>Task Type:</strong> chat</div>
+      <div><strong>Context Length:</strong> 26 chars</div>
+      <div><strong>Latency Mode:</strong> normal</div>
+      <div><strong>Cost Mode:</strong> normal</div>
+    </div>
+  </div>
+
+  <h2>2. Coding Task Request</h2>
+  <div class="demo-section">
+    <div class="model-info">
+      <span class="badge" style="background-color: #3b82f6;">CODE</span>
+      <span>coding-gpt-4</span>
+      <span style="font-size: 0.75rem; color: #9ca3af; margin-left: 0.5rem;">⚡ Fallback: coding-claude-sonnet</span>
+    </div>
+    <div class="debug-panel">
+      <h4>Routing Debug</h4>
+      <div><strong>Complexity:</strong> low</div>
+      <div><strong>Task Type:</strong> code</div>
+      <div><strong>Context Length:</strong> 66 chars</div>
+      <div><strong>Detected Keywords:</strong> react, typescript, async, await</div>
+    </div>
+  </div>
+
+  <h2>3. Reasoning Task Request</h2>
+  <div class="demo-section">
+    <div class="model-info">
+      <span class="badge" style="background-color: #8b5cf6;">REASON</span>
+      <span>reasoning-claude-opus</span>
+      <span style="font-size: 0.75rem; color: #9ca3af; margin-left: 0.5rem;">⚡ Fallback: reasoning-gpt-4</span>
+    </div>
+    <div class="debug-panel">
+      <h4>Routing Debug</h4>
+      <div><strong>Complexity:</strong> high</div>
+      <div><strong>Task Type:</strong> reasoning</div>
+      <div><strong>Context Length:</strong> 72 chars</div>
+      <div><strong>Detected Keywords:</strong> analyze, implications</div>
+    </div>
+  </div>
+
+  <h2>4. RAG Task Request</h2>
+  <div class="demo-section">
+    <div class="model-info">
+      <span class="badge" style="background-color: #f59e0b;">LONG</span>
+      <span>long-context-claude</span>
+      <span style="font-size: 0.75rem; color: #9ca3af; margin-left: 0.5rem;">⚡ Fallback: long-context-gpt-4-turbo</span>
+    </div>
+    <div class="debug-panel">
+      <h4>Routing Debug</h4>
+      <div><strong>Complexity:</strong> low</div>
+      <div><strong>Task Type:</strong> rag</div>
+      <div><strong>Context Length:</strong> 74 chars</div>
+      <div><strong>Detected Keywords:</strong> document, content, extract, summarize</div>
+    </div>
+  </div>
+
+  <h2>JSON API Response (for React testing)</h2>
+  <div class="demo-section">
+    <pre class="json-output" id="json-output">{
+  "selected_model": "coding-gpt-4",
+  "category": "coding",
+  "reason": "Coding task detected: routed to specialized coding model",
+  "fallback_model": "coding-claude-sonnet",
+  "metadata": {
+    "complexity": "low",
+    "task_type": "code",
+    "context_length": 66,
+    "latency_mode": "normal",
+    "cost_mode": "normal",
+    "token_estimate": 17,
+    "detected_keywords": ["react", "typescript", "async", "await"]
+  },
+  "ui": {
+    "color": "#3b82f6",
+    "badge": "CODE",
+    "icon": "code",
+    "debug": "Coding task detected: routed to specialized coding model"
+  }
+}</pre>
+  </div>
+
+  <footer style="text-align: center; color: #6b7280; margin-top: 2rem; border-top: 1px solid #e5e7eb; padding-top: 1rem;">
+    <p>© 2026 OmniRouter. All rights reserved.</p>
+    <p style="font-size: 0.875rem; margin-top: 0.25rem;">Powered by PrakashPujariAI</p>
+  </footer>
+</body>
+</html>

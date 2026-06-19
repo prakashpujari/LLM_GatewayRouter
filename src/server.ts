@@ -81,13 +81,17 @@ app.get('/', (_req: Request, res: Response) => {
   return res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 OmniRouter API server running on http://localhost:${PORT}`);
-  console.log(`📊 Routes:`);
-  console.log(`  POST /api/route - Route a request`);
-  console.log(`  POST /api/route/override - Route with override`);
-  console.log(`  GET /api/models - List models`);
-  console.log(`  GET /api/health - Health check`);
-});
+// Only start server if not imported (for serverless compatibility)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 OmniRouter API server running on http://localhost:${PORT}`);
+    console.log(`📊 Routes:`);
+    console.log(`  POST /api/route - Route a request`);
+    console.log(`  POST /api/route/override - Route with override`);
+    console.log(`  GET /api/models - List models`);
+    console.log(`  GET /api/health - Health check`);
+  });
+}
 
 export { app };
+export default app;
